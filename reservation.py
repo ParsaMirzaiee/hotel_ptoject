@@ -1,6 +1,3 @@
-from datetime import date
-
-
 class Reservation:
     def __init__(self, reservation_id,
                  booking_date,
@@ -12,18 +9,30 @@ class Reservation:
                  status
                  ):
 
-        if not isinstance(reservation_id,int) or reservation_id<0:
-            raise ValueError("reservation_id must be an integer and greater than 0")
+    @property
+    def reservation_id(self):
+        return self.__reservation_id
+    @reservation_id.setter
+    def reservation_id(self,reservation_id):
+        # reservation_id_validation(reservation_id)
+        self.__reservation_id = reservation_id
 
-        if not isinstance(guest_count,int) or guest_count<0:
-            raise ValueError("guest_count must be an integer and greater than 0")
 
-        if check_out_date <= check_in_date:
-            raise ValueError("check_out_date must be greater than check_in_date")
+    @property
+    def booking_date(self):
+        return  self.booking_date
+    @booking_date.setter
+    def booking_date(self,booking_date):
+        # booking_date_validation = booking_date
+        self.booking_date = booking_date
 
 
-        if not isinstance(booking_date,date) or not isinstance(check_in_date,date) or not isinstance(check_out_date,date):
-            raise ValueError("booking_date and check_in_date and check_out_date must be of type date")
+
+
+
+
+
+
 
 
 
@@ -37,11 +46,4 @@ class Reservation:
         self.status = status
 
 
-    def calculate_nights(self):
-        return (self.check_out_date - self.check_in_date).days
 
-    def calculate_total(self):
-        pass
-
-    def cancel_booking(self):
-        self.status = "Cancelled"
