@@ -8,34 +8,6 @@ class Reservation:
                  guest_count,
                  status
                  ):
-
-    @property
-    def reservation_id(self):
-        return self.__reservation_id
-    @reservation_id.setter
-    def reservation_id(self,reservation_id):
-        # reservation_id_validation(reservation_id)
-        self.__reservation_id = reservation_id
-
-
-    @property
-    def booking_date(self):
-        return  self.booking_date
-    @booking_date.setter
-    def booking_date(self,booking_date):
-        # booking_date_validation = booking_date
-        self.booking_date = booking_date
-
-
-
-
-
-
-
-
-
-
-
         self.reservation_id = reservation_id
         self.booking_date = booking_date
         self.check_in_date = check_in_date
@@ -45,5 +17,20 @@ class Reservation:
         self.guest_count = guest_count
         self.status = status
 
+    @property
+    def reservation_id(self):
+        return self.__reservation_id
 
+    @reservation_id.setter
+    def reservation_id(self, reservation_id):
+        # reservation_id_validation(reservation_id)
+        self.__reservation_id = reservation_id
 
+    @property
+    def booking_date(self):
+        return self.booking_date
+
+    @booking_date.setter
+    def booking_date(self, booking_date):
+        # booking_date_validation = booking_date
+        self.booking_date = booking_date
