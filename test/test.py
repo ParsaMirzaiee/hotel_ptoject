@@ -1,4 +1,3 @@
-from customers import *
 from datetime import date
 #تست مشتریان
 # customer1 = Guest("0110226534",
