@@ -1,14 +1,13 @@
 from tools.validation import *
-from datetime import datetime
+from datetime import date
 
 
 class Guest:
-    def __init__(self, national_id, first_name, last_name, birthdate, age, gender, phone_number):
+    def __init__(self, national_id, first_name, last_name, birthdate, gender, phone_number):
         self.national_id = national_id
         self.first_name = first_name
         self.last_name = last_name
         self.birthdate = birthdate
-        self.age = age
         self.gender = gender
         self.phone_number = phone_number
 

@@ -124,6 +124,50 @@ def reservation_status_validator(reservation_status):
         raise ValueError("reservation_status must be confirmed, or cancelled")
     return reservation_status
 
+#=========================================================================================================================
+#payment_validation
+#=========================================================================================================================
+
+
+def payment_id_validator(payment_id):
+    if not isinstance(payment_id, int) or payment_id <= 0:
+        raise ValueError("payment_id should be an integer and greater than 0 !!!")
+    return payment_id
+
+
+def amount_validator(amount):
+    if not isinstance(amount, float) or amount <= 0:
+        raise ValueError("invalid amount !!!")
+    return amount
+
+
+def payment_date_validator(payment_date):
+    if payment_date is None:
+        return payment_date
+
+    if not isinstance(payment_date,date) or payment_date > date.today():
+        raise ValueError("payment_date cannot be in the future and should be a type of date |format:yyyy-mm-dd")
+    return payment_date
+
+
+def payment_method_validator(payment_method):
+    allowed_methods = ("cash","card")
+    if not isinstance(payment_method, str) or payment_method not in allowed_methods:
+        raise ValueError("payment_method must be one of: cash, card")
+    return payment_method
 
 
 
+def payment_status_validator(payment_status):
+    allowed_statuses = ("paid","unpaid")
+    if not isinstance(payment_status, str) or payment_status not in allowed_statuses:
+        raise ValueError("payment_status must be one of: paid, unpaid")
+    return payment_status
+
+
+
+def transaction_code_validator(transaction_code):
+    if transaction_code is not None and not isinstance(transaction_code, str):
+        raise ValueError("Transaction code must be text or None.")
+
+    return transaction_code

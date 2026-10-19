@@ -19,6 +19,9 @@ class Reservation:
         self.room = room
         self.guest = guest
 
+
+
+
     @property
     def reservation_id(self):
         return self.__reservation_id
@@ -79,7 +82,8 @@ class Reservation:
 
     @room.setter
     def room(self, room):
-        self.__room = room
+         self.__room = room
+
 
     @property
     def guest(self):
@@ -88,3 +92,20 @@ class Reservation:
     @guest.setter
     def guest(self, guest):
         self.__guest = guest
+
+
+
+#=========================================================================================================================
+#methods
+#=========================================================================================================================
+
+    def calculate_nights(self):
+        return (self.check_out_date - self.check_in_date).days
+
+
+    def calculate_total(self):
+        return self.room.price_per_night * self.calculate_nights()
+
+
+    def cancel(self):
+        self.reservation_status = "Cancelled"
