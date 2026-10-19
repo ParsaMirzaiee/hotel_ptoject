@@ -20,19 +20,19 @@ from datetime import date
 #
 # print(customer2)
 # ----------------------------------------------------------------------------------------------------
-# import tkinter as tk
+import tkinter as tk
 
-# from controller.room_controller import RoomController
-# from view.room_view import RoomView
-#
-#
-# root = tk.Tk()
-# root.withdraw()
-#
-# room_controller = RoomController()
-# RoomView(root, room_controller)
-#
-# root.mainloop()
+from controller.room_controller import RoomController
+from view.room_view import RoomView
+
+
+root = tk.Tk()
+root.withdraw()
+
+room_controller = RoomController()
+RoomView(root, room_controller)
+
+root.mainloop()
 #===========================================================================================
 # import tkinter as tk
 #

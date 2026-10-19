@@ -71,7 +71,7 @@ class RoomView:
                 room_number=int(self.room_number_entry.get()),
                 capacity=int(self.capacity_combo.get()),
                 bed_configuration=self.bed_configuration_entry.get(),
-                price_per_night=float(self.price_entry.get()),
+                price_per_night=int(self.price_entry.get()),
                 has_view=self.has_view_combo.get() == "True",
                 status=self.status_combo.get()
             )

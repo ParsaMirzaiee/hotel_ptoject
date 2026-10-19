@@ -80,7 +80,7 @@ def has_view_validator(has_view):
 
 
 def status_validator(status):
-    allowed_statuses = ("available, unavailable","maintenance")
+    allowed_statuses = ("available", "unavailable", "maintenance")
 
     if not isinstance(status, str) or status not in allowed_statuses:
         raise ValueError("status must be one of: available, unavailable, maintenance")
