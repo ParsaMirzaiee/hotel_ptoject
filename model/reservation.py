@@ -108,4 +108,4 @@ class Reservation:
 
 
     def cancel(self):
-        self.reservation_status = "Cancelled"
+        self.reservation_status = "cancelled"

@@ -36,3 +36,6 @@ class RoomController:
 
     def find_all_room(self):
         return self.room_bl.find_all_room()
+
+    def find_by_room_number(self, room_number):
+        return self.room_bl.find_by_room_number(room_number)

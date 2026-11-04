@@ -22,7 +22,7 @@ class ReservationView:
         self.window.title("Add Reservation")
         self.window.geometry("380x420")
 
-        self.reservation_id_entry = self.add_entry("Reservation ID:")
+
 
         ttk.Label(self.window, text="Room:").pack(anchor="w", padx=15)
         self.room_combo = ttk.Combobox(
@@ -65,7 +65,6 @@ class ReservationView:
             guest = self.guest_controller.find_by_national_id(national_id)
 
             result = self.reservation_controller.save(
-                reservation_id=int(self.reservation_id_entry.get()),
                 booking_date=date.today(),
                 check_in_date=date.fromisoformat(self.check_in_entry.get()),
                 check_out_date=date.fromisoformat(self.check_out_entry.get()),

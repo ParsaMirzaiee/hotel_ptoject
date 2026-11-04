@@ -5,6 +5,17 @@ class ReservationBL:
     def __init__(self):
         self.reservation_da = ReservationDA()
 
+    def get_next_reservation_id(self):
+        reservations = self.reservation_da.find_all_reservations()
+        next_id = 1
+
+        for reservation in reservations:
+            if reservation.reservation_id >= next_id:
+                next_id = reservation.reservation_id + 1
+
+        return next_id
+
+
     def save(self, reservation):
         if reservation.check_out_date <= reservation.check_in_date:
             raise ValueError("Check-out date must be after check-in date.")

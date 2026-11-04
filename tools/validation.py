@@ -136,7 +136,7 @@ def payment_id_validator(payment_id):
 
 
 def amount_validator(amount):
-    if not isinstance(amount, float) or amount <= 0:
+    if not isinstance(amount,(int, float)) or amount <= 0:
         raise ValueError("invalid amount !!!")
     return amount
 

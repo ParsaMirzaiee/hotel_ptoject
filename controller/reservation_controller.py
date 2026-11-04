@@ -8,7 +8,6 @@ class ReservationController:
 
     def save(
         self,
-        reservation_id,
         booking_date,
         check_in_date,
         check_out_date,
@@ -18,6 +17,8 @@ class ReservationController:
         guest
     ):
         try:
+            reservation_id = self.reservation_bl.get_next_reservation_id()
+
             reservation = Reservation(
                 reservation_id,
                 booking_date,
