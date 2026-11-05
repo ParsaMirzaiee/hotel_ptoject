@@ -5,6 +5,23 @@ class RoomBL:
     def __init__(self):
         self.room_da = RoomDA()
 
+        self.room_prices = {
+            (1,False):400000,
+            (1,True):450000,
+            (2, False): 500000,
+            (2, True): 550000,
+            (3, False): 600000,
+            (3, True): 650000,
+            (4, False): 700000,
+            (4, True): 750000,
+            (5, False): 800000,
+            (5, True): 850000
+        }
+
+    def get_price_per_night(self,capacity,has_view):
+        return self.room_prices[(capacity,has_view)]
+
+
     def save(self, room):
         existing_room = self.room_da.find_by_room_number(room.room_number)
 

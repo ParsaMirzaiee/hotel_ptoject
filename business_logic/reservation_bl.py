@@ -15,6 +15,51 @@ class ReservationBL:
 
         return next_id
 
+    def find_available_room(
+            self,
+            rooms,
+            check_in_date,
+            check_out_date,
+            guest_count,
+            has_view
+    ):
+        selected_room = None
+
+        for room in rooms:
+            if (
+                    room.status == "available"
+                    and room.capacity >= guest_count
+                    and room.has_view == has_view
+            ):
+                room_is_available = True
+
+                room_reservations = self.reservation_da.find_by_room_number(
+                    room.room_number
+                )
+
+                for existing in room_reservations:
+                    if existing.reservation_status != "cancelled":
+                        dates_overlap = (
+                                check_in_date < existing.check_out_date
+                                and check_out_date > existing.check_in_date
+                        )
+
+                        if dates_overlap:
+                            room_is_available = False
+                            break
+
+                if room_is_available:
+                    if (
+                            selected_room is None
+                            or room.capacity < selected_room.capacity
+                    ):
+                        selected_room = room
+
+        return selected_room
+
+
+
+
 
     def save(self, reservation):
         if reservation.check_out_date <= reservation.check_in_date:

@@ -69,7 +69,6 @@ room_controller.save(
     room_number=101,
     capacity=2,
     bed_configuration="1 double bed",
-    price_per_night=500000,
     has_view=False,
     status="available"
 )

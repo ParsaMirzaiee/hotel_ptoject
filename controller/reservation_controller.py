@@ -7,16 +7,28 @@ class ReservationController:
         self.reservation_bl = ReservationBL()
 
     def save(
-        self,
-        booking_date,
-        check_in_date,
-        check_out_date,
-        guest_count,
-        reservation_status,
-        room,
-        guest
+            self,
+            booking_date,
+            check_in_date,
+            check_out_date,
+            guest_count,
+            has_view,
+            reservation_status,
+            rooms,
+            guest
     ):
         try:
+            room = self.reservation_bl.find_available_room(
+                rooms,
+                check_in_date,
+                check_out_date,
+                guest_count,
+                has_view
+            )
+
+            if room is None:
+                raise ValueError("No suitable available room was found.")
+
             reservation_id = self.reservation_bl.get_next_reservation_id()
 
             reservation = Reservation(
@@ -31,11 +43,14 @@ class ReservationController:
             )
 
             self.reservation_bl.save(reservation)
-            return "Reservation saved successfully."
-
+            return (
+                "Reservation saved successfully.\n"
+                f"Room number: {room.room_number}\n"
+                f"Nights: {reservation.calculate_nights()}\n"
+                f"Total amount: {reservation.calculate_total()}"
+            )
 
         except Exception as error:
-
             return f"Operation failed: {error}"
 
 

@@ -11,11 +11,13 @@ class RoomController:
         room_number,
         capacity,
         bed_configuration,
-        price_per_night,
         has_view,
         status
     ):
+
         try:
+            price_per_night = self.room_bl.get_price_per_night(capacity,has_view)
+
             room = Room(
                 room_number,
                 capacity,

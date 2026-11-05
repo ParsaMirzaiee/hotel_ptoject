@@ -29,7 +29,6 @@ class RoomView:
             self.update_bed_configuration
         )
 
-        self.price_entry = self.add_entry("Price per night:")
 
         self.has_view_combo = self.add_combo("Has view:", ["True", "False"])
         self.status_combo = self.add_combo(
@@ -71,7 +70,6 @@ class RoomView:
                 room_number=int(self.room_number_entry.get()),
                 capacity=int(self.capacity_combo.get()),
                 bed_configuration=self.bed_configuration_entry.get(),
-                price_per_night=int(self.price_entry.get()),
                 has_view=self.has_view_combo.get() == "True",
                 status=self.status_combo.get()
             )
