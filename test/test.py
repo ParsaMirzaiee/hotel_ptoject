@@ -49,51 +49,128 @@ from datetime import date
 # root.mainloop()
 
 #===================================================================================================
-import tkinter as tk
-from datetime import date, timedelta
-
-from controller.guest_controller import GuestController
-from controller.reservation_controller import ReservationController
-from controller.room_controller import RoomController
-from view.reservation_view import ReservationView
-
-
-root = tk.Tk()
-root.withdraw()
-
-room_controller = RoomController()
-guest_controller = GuestController()
-reservation_controller = ReservationController()
-
-room_controller.save(
-    room_number=101,
-    capacity=2,
-    bed_configuration="1 double bed",
-    has_view=False,
-    status="available"
-)
-
-guest_controller.save(
-    national_id="1234567890",
-    first_name="Ali",
-    last_name="Ahmadi",
-    birthdate=date(2000, 5, 12),
-    gender="male",
-    phone_number="09123456789"
-)
-
-check_in = date.today() + timedelta(days=3)
-check_out = check_in + timedelta(days=2)
-
-print("For a valid reservation, enter these dates:")
-print("Check-in:", check_in)
-print("Check-out:", check_out)
-
-ReservationView(
-    root,
-    reservation_controller,
-    room_controller,
-    guest_controller
-)
-
-root.mainloop()
+# import tkinter as tk
+# from datetime import date, timedelta
+#
+# from controller.guest_controller import GuestController
+# from controller.reservation_controller import ReservationController
+# from controller.room_controller import RoomController
+# from view.reservation_view import ReservationView
+#
+#
+# root = tk.Tk()
+# root.withdraw()
+#
+# room_controller = RoomController()
+# guest_controller = GuestController()
+# reservation_controller = ReservationController()
+#
+# room_controller.save(
+#     room_number=101,
+#     capacity=2,
+#     bed_configuration="1 double bed",
+#     has_view=False,
+#     status="available"
+# )
+#
+# guest_controller.save(
+#     national_id="1234567890",
+#     first_name="Ali",
+#     last_name="Ahmadi",
+#     birthdate=date(2000, 5, 12),
+#     gender="male",
+#     phone_number="09123456789"
+# )
+#
+# check_in = date.today() + timedelta(days=3)
+# check_out = check_in + timedelta(days=2)
+#
+# print("For a valid reservation, enter these dates:")
+# print("Check-in:", check_in)
+# print("Check-out:", check_out)
+#
+# ReservationView(
+#     root,
+#     reservation_controller,
+#     room_controller,
+#     guest_controller
+# )
+#
+# root.mainloop()
+#====================================================================================
+# import tkinter as tk
+#
+# from controller.guest_controller import GuestController
+# from controller.payment_controller import PaymentController
+# from controller.reservation_controller import ReservationController
+# from controller.room_controller import RoomController
+# from view.guest_view import GuestView
+#
+#
+# root = tk.Tk()
+# root.withdraw()
+#
+# room_controller = RoomController()
+# guest_controller = GuestController()
+# reservation_controller = ReservationController()
+# payment_controller = PaymentController()
+#
+#
+# room_controller.save(
+#     room_number=101,
+#     capacity=2,
+#     bed_configuration="1 double bed",
+#     has_view=False,
+#     status="available"
+# )
+#
+# room_controller.save(
+#     room_number=102,
+#     capacity=2,
+#     bed_configuration="1 double bed",
+#     has_view=True,
+#     status="available"
+# )
+#
+# room_controller.save(
+#     room_number=103,
+#     capacity=3,
+#     bed_configuration="1 double bed + 1 single bed",
+#     has_view=False,
+#     status="available"
+# )
+#
+# room_controller.save(
+#     room_number=104,
+#     capacity=3,
+#     bed_configuration="1 double bed + 1 single bed",
+#     has_view=True,
+#     status="available"
+# )
+#
+# room_controller.save(
+#     room_number=105,
+#     capacity=5,
+#     bed_configuration="2 double beds + 1 single bed",
+#     has_view=False,
+#     status="available"
+# )
+#
+# room_controller.save(
+#     room_number=106,
+#     capacity=5,
+#     bed_configuration="2 double beds + 1 single bed",
+#     has_view=True,
+#     status="available"
+# )
+#
+#
+# GuestView(
+#     root,
+#     guest_controller,
+#     room_controller,
+#     reservation_controller,
+#     payment_controller
+# )
+#
+# root.mainloop()

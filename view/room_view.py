@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox
 
 
 class RoomView:
-    BED_CONFIGURATIONS = {
+    bed_configurations = {
         1: "1 single bed",
         2: "1 double bed",
         3: "1 double bed + 1 single bed",
@@ -13,51 +13,70 @@ class RoomView:
 
     def __init__(self, root, room_controller):
         self.room_controller = room_controller
+
         self.window = tk.Toplevel(root)
         self.window.title("Add Room")
         self.window.geometry("350x350")
 
         self.room_number_entry = self.add_entry("Room number:")
+
         self.capacity_combo = self.add_combo(
             "Capacity:",
             ["1", "2", "3", "4", "5"]
         )
-        self.bed_configuration_entry = self.add_entry("Bed configuration:")
-        self.bed_configuration_entry.config(state="readonly")
         self.capacity_combo.bind(
             "<<ComboboxSelected>>",
             self.update_bed_configuration
         )
 
+        self.bed_configuration_entry = self.add_entry(
+            "Bed configuration:"
+        )
+        self.bed_configuration_entry.config(state="readonly")
 
-        self.has_view_combo = self.add_combo("Has view:", ["True", "False"])
+        self.has_view_combo = self.add_combo(
+            "Has view:",
+            ["True", "False"]
+        )
+
         self.status_combo = self.add_combo(
             "Status:",
             ["available", "unavailable", "maintenance"]
         )
 
-        save_button = ttk.Button(
+        ttk.Button(
             self.window,
             text="Save room",
             command=self.save_room
-        )
-        save_button.pack(pady=12)
+        ).pack(pady=12)
 
     def add_entry(self, label_text):
-        ttk.Label(self.window, text=label_text).pack(anchor="w", padx=15)
+        ttk.Label(
+            self.window,
+            text=label_text
+        ).pack(anchor="w", padx=15)
+
         entry = ttk.Entry(self.window)
         entry.pack(fill="x", padx=15, pady=(0, 8))
         return entry
 
     def add_combo(self, label_text, values):
-        ttk.Label(self.window, text=label_text).pack(anchor="w", padx=15)
-        combo = ttk.Combobox(self.window, values=values, state="readonly")
+        ttk.Label(
+            self.window,
+            text=label_text
+        ).pack(anchor="w", padx=15)
+
+        combo = ttk.Combobox(
+            self.window,
+            values=values,
+            state="readonly"
+        )
         combo.pack(fill="x", padx=15, pady=(0, 8))
         return combo
 
     def update_bed_configuration(self, event=None):
         capacity = int(self.capacity_combo.get())
-        configuration = self.BED_CONFIGURATIONS[capacity]
+        configuration = self.bed_configurations[capacity]
 
         self.bed_configuration_entry.config(state="normal")
         self.bed_configuration_entry.delete(0, tk.END)
@@ -82,5 +101,5 @@ class RoomView:
         except ValueError:
             messagebox.showerror(
                 "Room",
-                "Enter a valid room number, capacity, and price."
+                "Enter a valid room number and select the room details."
             )

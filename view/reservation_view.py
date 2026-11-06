@@ -2,6 +2,8 @@ import tkinter as tk
 from datetime import date
 from tkinter import ttk, messagebox
 
+from view.payment_view import PaymentView
+
 
 class ReservationView:
     def __init__(
@@ -9,34 +11,27 @@ class ReservationView:
         root,
         reservation_controller,
         room_controller,
-        guest_controller
+        guest,
+        payment_controller
     ):
+        self.root = root
         self.reservation_controller = reservation_controller
         self.room_controller = room_controller
-        self.guest_controller = guest_controller
-
-        self.guests = self.guest_controller.find_all_guest()
+        self.payment_controller = payment_controller
+        self.guest = guest
 
         self.window = tk.Toplevel(root)
-        self.window.title("Add Reservation")
-        self.window.geometry("380x420")
+        self.window.title("Reservation Information")
+        self.window.geometry("380x350")
 
-        ttk.Label(self.window, text="Guest:").pack(
-            anchor="w", padx=15
-        )
-
-        self.guest_combo = ttk.Combobox(
+        ttk.Label(
             self.window,
-            values=[guest.national_id for guest in self.guests],
-            state="readonly"
-        )
-        self.guest_combo.pack(fill="x", padx=15, pady=(0, 8))
-
-        if self.guests:
-            self.guest_combo.current(0)
+            text=f"Guest: {self.guest.first_name} {self.guest.last_name}"
+        ).pack(anchor="w", padx=15, pady=(15, 8))
 
         ttk.Label(self.window, text="Room view:").pack(
-            anchor="w", padx=15
+            anchor="w",
+            padx=15
         )
 
         self.has_view_combo = ttk.Combobox(
@@ -62,9 +57,10 @@ class ReservationView:
         ).pack(pady=12)
 
     def add_entry(self, label_text):
-        ttk.Label(self.window, text=label_text).pack(
-            anchor="w", padx=15
-        )
+        ttk.Label(
+            self.window,
+            text=label_text
+        ).pack(anchor="w", padx=15)
 
         entry = ttk.Entry(self.window)
         entry.pack(fill="x", padx=15, pady=(0, 8))
@@ -72,14 +68,6 @@ class ReservationView:
 
     def save_reservation(self):
         try:
-            national_id = self.guest_combo.get()
-            guest = self.guest_controller.find_by_national_id(
-                national_id
-            )
-
-            if guest is None:
-                raise ValueError("Select a guest.")
-
             result = self.reservation_controller.save(
                 booking_date=date.today(),
                 check_in_date=date.fromisoformat(
@@ -92,16 +80,27 @@ class ReservationView:
                 has_view=self.has_view_combo.get() == "Yes",
                 reservation_status="confirmed",
                 rooms=self.room_controller.find_all_room(),
-                guest=guest
+                guest=self.guest
             )
 
             if result.startswith("Reservation saved successfully."):
                 messagebox.showinfo("Reservation", result)
+
+                reservations = (
+                    self.reservation_controller.find_all_reservations()
+                )
+                reservation = reservations[-1]
+
+                PaymentView(
+                    self.root,
+                    self.payment_controller,
+                    reservation
+                )
             else:
                 messagebox.showerror("Reservation", result)
 
         except ValueError as error:
             messagebox.showerror(
                 "Reservation",
-                f"Check the guest, dates, and guest count. {error}"
+                f"Check the dates and guest count. {error}"
             )
